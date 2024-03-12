@@ -197,6 +197,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.10.0"
+  spreadsheet_decoder:
+    dependency: "direct main"
+    description:
+      name: spreadsheet_decoder
+      sha256: "1678ea1aa88880b9d69dd979851d05d424f2f5f5426f6b93bbd99c9a8cd1bff5"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.0"
   stack_trace:
     dependency: transitive
     description:
