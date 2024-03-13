@@ -1,13 +1,12 @@
+//readings.dart
 import 'package:flutter/services.dart';
 import 'package:daily_qt_hl/constants.dart';
 import 'package:spreadsheet_decoder/spreadsheet_decoder.dart';
 
-Future<Map<String, String>> getReadings() async {
-  final today = DateTime.now(); // Get today's date
-
+Future<Map<String, String>> getReadings(DateTime date) async {
   // Format the date to match the format in the Excel sheet
   final formattedDate =
-      '${today.year}-${_padZero(today.month)}-${_padZero(today.day)}';
+      '${date.year}-${_padZero(date.month)}-${_padZero(date.day)}';
 
   // Load the Excel file from the assets
   ByteData data = await rootBundle.load(excelFilePath);
@@ -34,13 +33,14 @@ Future<Map<String, String>> getReadings() async {
     final eveningBook = row[3];
     final eveningChapter = row[4];
     return {
+      'date': formattedDate,
       'morningBook': morningBook.toString(),
       'morningChapter': morningChapter.toString(),
       'eveningBook': eveningBook.toString(),
       'eveningChapter': eveningChapter.toString(),
     };
   } else {
-    throw Exception('No readings found for today.');
+    throw Exception('No readings found for $formattedDate.');
   }
 }
 
