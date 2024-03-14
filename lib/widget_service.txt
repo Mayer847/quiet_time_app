@@ -1,0 +1,40 @@
+// //widget_service.dart
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
+// import 'readings.dart';
+
+// class WidgetService {
+//   static const int alarmId = 0;
+
+//   static Future<void> callbackDispatcher(
+//       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) async {
+//     // This is the background task
+//     final readings = await getReadings(DateTime.now());
+
+//     // Create the notification that will be shown when the widget is clicked
+//     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+//         'your channel id', 'your channel name',
+//         importance: Importance.max, priority: Priority.high, ticker: 'ticker');
+//     var platformChannelSpecifics =
+//         NotificationDetails(android: androidPlatformChannelSpecifics);
+//     await flutterLocalNotificationsPlugin.show(
+//         0,
+//         'Today\'s Readings',
+//         'Morning: ${readings['morningBook']}, Chapter ${readings['morningChapter']}\n'
+//             'Evening: ${readings['eveningBook']}, Chapter ${readings['eveningChapter']}',
+//         platformChannelSpecifics);
+
+//     // Schedule the next update for tomorrow
+//     await AndroidAlarmManager.oneShot(
+//       const Duration(days: 1),
+//       alarmId,
+//       callbackDispatcher,
+//     );
+//   }
+
+//   static void initialize(
+//       FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin) {
+//     AndroidAlarmManager.initialize();
+//     callbackDispatcher(flutterLocalNotificationsPlugin);
+//   }
+// }
