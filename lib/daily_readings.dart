@@ -1,3 +1,4 @@
+//daily_readings.dart
 import 'package:flutter/material.dart';
 import 'readings.dart';
 
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
         return "Tomorrow's Readings";
       }
     }
-    return "Readings for ${date.year}-${_padZero(date.month)}-${_padZero(date.day)}";
+    return "Readings for ${_formatDate(date)}";
   }
 
   @override
@@ -66,19 +67,21 @@ class _MyAppState extends State<MyApp> {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return const CircularProgressIndicator(); // Show loading indicator while waiting for data
                       } else if (snapshot.hasError) {
+                        // Print the error message to the console
+                        // print('Error: ${snapshot.error}');
                         return const Text('Error loading data');
                       } else {
                         final readings = snapshot.data!;
                         return Column(
                           children: [
                             Text(
-                              'Morning: ${readings['morningBook']}, Chapter ${readings['morningChapter']}',
+                              'Morning: ${readings['morningBook']} ${readings['morningChapter']}',
                               style: const TextStyle(fontSize: 18),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              'Evening: ${readings['eveningBook']}, Chapter ${readings['eveningChapter']}',
+                              'Evening: ${readings['eveningBook']} ${readings['eveningChapter']}',
                               style: const TextStyle(fontSize: 18),
                               textAlign: TextAlign.center,
                             ),
@@ -101,6 +104,23 @@ class _MyAppState extends State<MyApp> {
   }
 
   String _formatDate(DateTime date) {
-    return '${date.year}-${_padZero(date.month)}-${_padZero(date.day)}';
+    const monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+
+    final monthName = monthNames[date.month - 1];
+
+    return '$monthName ${_padZero(date.day)}, ${date.year}';
   }
 }
