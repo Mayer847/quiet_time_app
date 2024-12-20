@@ -1,4 +1,3 @@
-//daily_readings.dart
 import 'package:flutter/material.dart';
 import 'readings.dart';
 
@@ -6,12 +5,18 @@ class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _MyAppState createState() => _MyAppState();
 }
 
 class _MyAppState extends State<MyApp> {
   DateTime _date = DateTime.now();
+  bool _isNightMode = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _isNightMode = _date.hour >= 18 || _date.hour < 6;
+  }
 
   String _getTitle(DateTime date) {
     final today = DateTime.now();
@@ -30,26 +35,36 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: _isNightMode ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
-        appBar: AppBar(title: Text(_getTitle(_date))),
+        appBar: AppBar(
+          title: Text(_getTitle(_date)),
+          actions: [
+            IconButton(
+              icon: Icon(_isNightMode ? Icons.wb_sunny : Icons.nights_stay),
+              onPressed: () {
+                setState(() {
+                  _isNightMode = !_isNightMode;
+                });
+              },
+            ),
+          ],
+        ),
         body: GestureDetector(
-          // Enable swiping anywhere on the screen
           onHorizontalDragEnd: (details) {
             final velocity = details.primaryVelocity;
             if (velocity! > 0) {
-              // Swipe right (subtract one day)
               setState(() {
                 _date = _date.subtract(const Duration(days: 1));
               });
             } else if (velocity < 0) {
-              // Swipe left (add one day)
               setState(() {
                 _date = _date.add(const Duration(days: 1));
               });
             }
           },
           child: Container(
-            color: Colors.grey[200], // Set grey background color
+            color: _isNightMode ? Colors.black : Colors.grey[200],
             child: Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -57,7 +72,18 @@ class _MyAppState extends State<MyApp> {
                 children: [
                   Text(
                     'Date: ${_formatDate(_date)}',
-                    style: const TextStyle(fontSize: 20),
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: _isNightMode ? Colors.white : Colors.black,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  Text(
+                    'Day: ${_formatDay(_date)}',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: _isNightMode ? Colors.white : Colors.black,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 16),
@@ -65,10 +91,8 @@ class _MyAppState extends State<MyApp> {
                     future: getReadings(_date),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const CircularProgressIndicator(); // Show loading indicator while waiting for data
+                        return const CircularProgressIndicator();
                       } else if (snapshot.hasError) {
-                        // Print the error message to the console
-                        // print('Error: ${snapshot.error}');
                         return const Text('Error loading data');
                       } else {
                         final readings = snapshot.data!;
@@ -76,13 +100,21 @@ class _MyAppState extends State<MyApp> {
                           children: [
                             Text(
                               'Morning: ${readings['morningBook']} ${readings['morningChapter']}',
-                              style: const TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    _isNightMode ? Colors.white : Colors.black,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                             const SizedBox(height: 8),
                             Text(
                               'Evening: ${readings['eveningBook']} ${readings['eveningChapter']}',
-                              style: const TextStyle(fontSize: 18),
+                              style: TextStyle(
+                                fontSize: 18,
+                                color:
+                                    _isNightMode ? Colors.white : Colors.black,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -118,9 +150,20 @@ class _MyAppState extends State<MyApp> {
       'November',
       'December'
     ];
-
     final monthName = monthNames[date.month - 1];
-
     return '$monthName ${_padZero(date.day)}, ${date.year}';
+  }
+
+  String _formatDay(DateTime date) {
+    const dayNames = [
+      'Sunday',
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday'
+    ];
+    return dayNames[date.weekday % 7];
   }
 }
