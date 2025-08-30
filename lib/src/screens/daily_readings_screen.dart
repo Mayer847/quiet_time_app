@@ -8,6 +8,7 @@ class DailyReadingsScreen extends StatefulWidget {
   const DailyReadingsScreen({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _DailyReadingsScreenState createState() => _DailyReadingsScreenState();
 }
 
