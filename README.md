@@ -13,7 +13,18 @@ The Quiet Time App is designed to help you build a consistent and sustainable ha
 * **Progress Tracking:** The app helps you keep track of your progress, so you always know where you are on your one-year journey.
 * **Simple & Intuitive Interface:** A clean design that focuses on the reading experience, free from distractions.
 
-### Getting Started
+---
+
+### Download & View
+
+You can download and use the app on your Android device or view it directly in your web browser.
+
+* **Android (.apk) 📱:** Head to the [Releases](https://github.com/mayer847/quiet_time_app/releases) page to download the latest `.apk` file and install it on your device.
+* **Web App 🌐:** View the app directly in your browser [here](https://mayer847.github.io/quiet_time_app/).
+
+---
+
+### Getting Started (For Developers)
 
 To get a local copy up and running, follow these simple steps.
 
@@ -26,7 +37,7 @@ To get a local copy up and running, follow these simple steps.
 
 1.  Clone the repository:
     ```sh
-    git clone [https://github.com/Mayer847/quiet_time_app.git](https://github.com/Mayer847/quiet_time_app.git)
+    git clone [https://github.com/mayer847/quiet_time_app.git](https://github.com/mayer847/quiet_time_app.git)
     ```
 2.  Navigate to the project directory:
     ```sh
@@ -41,6 +52,8 @@ To get a local copy up and running, follow these simple steps.
     flutter run
     ```
 
+---
+
 ### Technologies Used
 
 * Flutter
@@ -50,4 +63,4 @@ To get a local copy up and running, follow these simple steps.
 
 ### License
 
-This project is licensed under the MIT License. See the `LICENSE` file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
