@@ -1,4 +1,4 @@
-import 'package:daily_qt_hl/src/localization/app_localizations.dart';
+import 'package:quiet_time_app/src/localization/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 

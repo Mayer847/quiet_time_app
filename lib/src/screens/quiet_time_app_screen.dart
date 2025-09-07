@@ -4,15 +4,15 @@ import '../theme/theme_provider.dart';
 import '../utils/date_utils.dart';
 import '../services/readings_service.dart';
 
-class DailyReadingsScreen extends StatefulWidget {
-  const DailyReadingsScreen({super.key});
+class QuietTimeAppScreen extends StatefulWidget {
+  const QuietTimeAppScreen({super.key});
 
   @override
   // ignore: library_private_types_in_public_api
-  _DailyReadingsScreenState createState() => _DailyReadingsScreenState();
+  _QuietTimeAppScreenState createState() => _QuietTimeAppScreenState();
 }
 
-class _DailyReadingsScreenState extends State<DailyReadingsScreen> {
+class _QuietTimeAppScreenState extends State<QuietTimeAppScreen> {
   DateTime _date = DateTime.now();
 
   @override

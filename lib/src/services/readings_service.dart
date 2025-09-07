@@ -1,5 +1,5 @@
-import 'package:daily_qt_hl/constants.dart';
-import 'package:daily_qt_hl/src/utils/date_utils.dart';
+import 'package:quiet_time_app/constants.dart';
+import 'package:quiet_time_app/src/utils/date_utils.dart';
 import 'package:flutter/services.dart';
 import 'package:spreadsheet_decoder/spreadsheet_decoder.dart';
 

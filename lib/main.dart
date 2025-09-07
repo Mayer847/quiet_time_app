@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'src/settings/settings_controller.dart';
 import 'src/settings/settings_service.dart';
 import 'src/theme/theme_provider.dart';
-import 'src/screens/daily_readings_screen.dart';
+import 'src/screens/quiet_time_app_screen.dart';
 
 void main() async {
   final settingsController = SettingsController(SettingsService());
@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       theme: themeProvider.isNightMode ? ThemeData.dark() : ThemeData.light(),
-      home: const DailyReadingsScreen(),
+      home: const QuietTimeAppScreen(),
     );
   }
 }

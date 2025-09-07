@@ -97,7 +97,7 @@ abstract class AppLocalizations {
   /// The title of the application
   ///
   /// In en, this message translates to:
-  /// **'daily_qt_hl'**
+  /// **'quiet_time_app'**
   String get appTitle;
 }
 

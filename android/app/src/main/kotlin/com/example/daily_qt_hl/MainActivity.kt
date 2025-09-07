@@ -1,4 +1,4 @@
-package com.example.daily_qt_hl
+package com.example.quiet_time_app
 
 import io.flutter.embedding.android.FlutterActivity
 

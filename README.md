@@ -1,4 +1,4 @@
-# daily_qt_hl
+# quiet_time_app
 
 A new Flutter project.
 
