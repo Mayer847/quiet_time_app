@@ -1,4 +1,4 @@
-package com.example.quiet_time_app
+package com.mayer847.quiet_time_app
 
 import io.flutter.embedding.android.FlutterActivity
 

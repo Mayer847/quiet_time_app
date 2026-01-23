@@ -6,12 +6,11 @@ The Quiet Time App is designed to help you build a consistent and sustainable ha
 
 ### Features
 
-* **Daily Reading Plan:** Follow a year-long plan with a set schedule for each day's readings.
-* **Morning & Evening Readings:** The plan is split into two parts:
-    * **Morning Quiet Time:** Focus on the New Testament.
-    * **Evening Highlight:** Engage with a key passage or "highlight" from the Old Testament.
-* **Progress Tracking:** The app helps you keep track of your progress, so you always know where you are on your one-year journey.
-* **Simple & Intuitive Interface:** A clean design that focuses on the reading experience, free from distractions.
+- **Daily Reading Plan:** Follow a year-long plan with a set schedule for each day's readings.
+- **Morning & Evening Readings:** The plan is split into two parts:
+  - **Morning Quiet Time:** Focus on the New Testament.
+  - **Evening Highlight:** Engage with a key passage or "highlight" from the Old Testament.
+- **Simple & Intuitive Interface:** A clean design that focuses on the reading experience, free from distractions.
 
 ---
 
@@ -19,8 +18,8 @@ The Quiet Time App is designed to help you build a consistent and sustainable ha
 
 You can download and use the app on your Android device or view it directly in your web browser.
 
-* **Android (.apk) 📱:** Head to the [Releases](https://github.com/mayer847/quiet_time_app/releases) page to download the latest `.apk` file and install it on your device.
-* **Web App 🌐:** View the app directly in your browser [here](https://mayer847.github.io/quiet_time_app/).
+- **Android (.apk) 📱:** Head to the [Releases](https://github.com/mayer847/quiet_time_app/releases) page to download the latest `.apk` file and install it on your device.
+- **Web App 🌐:** View the app directly in your browser [here](https://mayer847.github.io/quiet_time_app/).
 
 ---
 
@@ -30,8 +29,8 @@ To get a local copy up and running, follow these simple steps.
 
 **Prerequisites:**
 
-* Flutter SDK installed on your machine.
-* A code editor like VS Code or Android Studio.
+- Flutter SDK installed on your machine.
+- A code editor like VS Code or Android Studio.
 
 **Installation:**
 
@@ -56,8 +55,8 @@ To get a local copy up and running, follow these simple steps.
 
 ### Technologies Used
 
-* Flutter
-* Dart
+- Flutter
+- Dart
 
 ---
 
