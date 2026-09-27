@@ -1,51 +1,44 @@
-import 'package:quiet_time_app/constants.dart';
-import 'package:quiet_time_app/src/utils/date_utils.dart';
+import 'dart:convert';
+
 import 'package:flutter/services.dart';
-import 'package:spreadsheet_decoder/spreadsheet_decoder.dart';
 
-Future<Map<String, String>> getReadings(DateTime date) async {
-  ByteData data = await rootBundle.load(excelFilePath);
-  var bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-  var decoder = SpreadsheetDecoder.decodeBytes(bytes, verify: true);
+import '../../constants.dart';
+import '../models/reading.dart';
 
-  var table = decoder.tables['Sheet1'];
-  const monthNames = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December'
-  ];
+class ReadingsService {
+  ReadingsService._();
 
-  var row = table?.rows.skip(1).firstWhere(
-    (row) {
-      final excelMonth = row[0];
-      final excelDay = row[1];
-      return excelMonth == monthNames[date.month - 1] && excelDay == date.day;
-    },
-    orElse: () => [],
-  );
+  static final ReadingsService instance = ReadingsService._();
 
-  if (row!.isNotEmpty) {
-    final morningBook = row[2];
-    final morningChapter = row[3];
-    final eveningBook = row[4];
-    final eveningChapter = row[5];
-    return {
-      'date': formatDate(date),
-      'morningBook': morningBook.toString(),
-      'morningChapter': morningChapter.toString(),
-      'eveningBook': eveningBook.toString(),
-      'eveningChapter': eveningChapter.toString(),
+  Map<String, DailyReading>? _readings;
+
+  Future<void> load() async {
+    if (_readings != null) return;
+
+    final jsonString = await rootBundle.loadString(readingsFilePath);
+    final jsonList = jsonDecode(jsonString) as List<dynamic>;
+
+    _readings = {
+      for (final item in jsonList)
+        (item as Map<String, dynamic>)['key'] as String:
+            DailyReading.fromJson(item),
     };
-  } else {
-    throw Exception('No readings found for ${formatDate(date)}.');
   }
+
+  DailyReading? getReading(DateTime date) {
+    final readings = _readings;
+
+    if (readings == null) {
+      throw StateError('ReadingsService.load() must be called first.');
+    }
+
+    return readings[readingDateKey(date)];
+  }
+}
+
+String readingDateKey(DateTime date) {
+  final month = date.month.toString().padLeft(2, '0');
+  final day = date.day.toString().padLeft(2, '0');
+
+  return '$month-$day';
 }

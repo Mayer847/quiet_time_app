@@ -1,19 +1,17 @@
-
-import java.util.Properties
 import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
 }
 
-
 val keystoreProperties = Properties()
 val keystorePropertiesFile = rootProject.file("key.properties")
+val hasReleaseSigning = keystorePropertiesFile.exists()
 
-if (keystorePropertiesFile.exists()) {
+if (hasReleaseSigning) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
@@ -33,31 +31,37 @@ android {
 
     defaultConfig {
         applicationId = "com.mayer847.quiet_time_app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
+
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
     signingConfigs {
-        create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String
-            keyPassword = keystoreProperties["keyPassword"] as String
-            storeFile = file(keystoreProperties["storeFile"] as String)
-            storePassword = keystoreProperties["storePassword"] as String
+        if (hasReleaseSigning) {
+            create("release") {
+                keyAlias = keystoreProperties.getProperty("keyAlias")
+                keyPassword = keystoreProperties.getProperty("keyPassword")
+                storeFile = file(
+                    keystoreProperties.getProperty("storeFile")
+                )
+                storePassword = keystoreProperties.getProperty("storePassword")
+            }
         }
     }
- 
-    
+
     buildTypes {
         release {
-            signingConfig = signingConfigs.getByName("release")
-            // Optional later:
-            // isMinifyEnabled = true
-            // isShrinkResources = true
+            signingConfig = if (hasReleaseSigning) {
+                signingConfigs.getByName("release")
+            } else {
+                signingConfigs.getByName("debug")
+            }
 
+            isMinifyEnabled = false
+            isShrinkResources = false
         }
     }
 }

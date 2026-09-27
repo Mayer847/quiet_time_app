@@ -1,2 +1,2 @@
 // constants.dart
-const excelFilePath = 'assets/qt_schedule.xlsx';
+const readingsFilePath = 'assets/qt_schedule.json';

@@ -1,24 +1,18 @@
 name: quiet_time_app
-description: "A new Flutter project."
+description: "A daily Bible reading schedule."
 
 # Prevent accidental publishing to pub.dev.
 publish_to: 'none'
 
-version: 1.0.0+1
+version: 1.1.0+2
 
 environment:
   sdk: '>=3.2.0 <4.0.0'
 
 dependencies:
-  excel: ^4.0.6
   flutter:
     sdk: flutter
-  flutter_gen: ^5.10.0
-  flutter_localizations:
-    sdk: flutter
-  intl: 0.20.2
   provider: ^6.1.5
-  spreadsheet_decoder: ^2.3.0
 
 dev_dependencies:
   flutter_test:
@@ -30,13 +24,10 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
-  # Enable generation of localized Strings from arb files.
-  generate: true
-
   assets:
     # Add assets from the images directory to the application.
     - assets/images/
-    - assets/qt_schedule.xlsx
+    - assets/qt_schedule.json
 
 flutter_launcher_icons:
   android: "launcher_icon"
